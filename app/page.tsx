@@ -1,5 +1,5 @@
 import { UserButton } from "@clerk/nextjs";
-import { Button } from "./_components/ui/button";
+
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
