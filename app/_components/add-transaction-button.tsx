@@ -5,7 +5,7 @@ import { Button } from "./ui/button";
 
 import { useState } from "react";
 
-import AddTransactionDialog from "./upsert-transaction-dialog";
+import UpsertTransactionDialog from "./upsert-transaction-dialog";
 
 const AddTransactionButton = () => {
   const [dialogIsOpen, setDialogIsOpen] = useState(false);
@@ -19,7 +19,10 @@ const AddTransactionButton = () => {
         Adicionar Transação
         <ArrowDownUpIcon />
       </Button>
-      <AddTransactionDialog isOpen={dialogIsOpen} setIsOpen={setDialogIsOpen} />
+      <UpsertTransactionDialog
+        isOpen={dialogIsOpen}
+        setIsOpen={setDialogIsOpen}
+      />
     </>
   );
 };

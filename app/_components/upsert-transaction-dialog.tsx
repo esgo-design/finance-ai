@@ -9,15 +9,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
-
-import { z } from "zod";
-import {
-  TransactionCategory,
-  TransactionPaymentMethod,
-  TransactionType,
-} from "@prisma/client";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 import {
   Form,
   FormControl,
@@ -41,13 +32,21 @@ import {
   TRANSACTION_TYPE_OPTIONS,
 } from "../_constants/transactions";
 import { DatePicker } from "./ui/date-picker";
+import { z } from "zod";
+import {
+  TransactionCategory,
+  TransactionPaymentMethod,
+  TransactionType,
+} from "@prisma/client";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { upsertTransaction } from "../_actions/upsert-transaction";
 
 interface UpsertTransactionDialogProps {
   isOpen: boolean;
-  setIsOpen: (isOpen: boolean) => void;
   defaultValues?: FormSchema;
   transactionId?: string;
+  setIsOpen: (isOpen: boolean) => void;
 }
 
 const formSchema = z.object({
@@ -82,14 +81,14 @@ type FormSchema = z.infer<typeof formSchema>;
 
 const UpsertTransactionDialog = ({
   isOpen,
-  setIsOpen,
   defaultValues,
   transactionId,
+  setIsOpen,
 }: UpsertTransactionDialogProps) => {
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: defaultValues ?? {
-      amount: 1,
+      amount: 50,
       category: TransactionCategory.OTHER,
       date: new Date(),
       name: "",
@@ -124,8 +123,7 @@ const UpsertTransactionDialog = ({
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
-            {" "}
-            {isUpdate ? "Atualizar" : "Criar"} Transação
+            {isUpdate ? "Atualizar" : "Criar"} transação
           </DialogTitle>
           <DialogDescription>Insira as informações abaixo:</DialogDescription>
         </DialogHeader>
@@ -189,7 +187,6 @@ const UpsertTransactionDialog = ({
                       ))}
                     </SelectContent>
                   </Select>
-
                   <FormMessage />
                 </FormItem>
               )}
